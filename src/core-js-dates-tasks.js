@@ -33,7 +33,7 @@ function dateToTimestamp(date) {
  * Date(2015, 10, 20, 23, 15, 1) => '23:15:01'
  */
 function getTime(date) {
-  return date.toLocaleTimeString('ua');
+  return date.toLocaleTimeString('uk');
 }
 
 /**
@@ -199,10 +199,10 @@ function getCountWeekendsInMonth(month, year) {
  */
 function getWeekNumberByDate(date) {
   const startOfYear = new Date(date.getUTCFullYear(), 0, 1);
-  const firstDayOfYear = startOfYear.getUTCDay();
+  const firstDayOfYear = startOfYear.getDay();
 
-  startOfYear.setDate(startOfYear.getDate() + ((7 - firstDayOfYear) % 7));
-  let counter = firstDayOfYear !== 0 ? 1 : 0;
+  startOfYear.setDate(startOfYear.getDate() + ((8 - firstDayOfYear) % 7));
+  let counter = firstDayOfYear !== 1 ? 1 : 0;
   while (startOfYear <= date) {
     counter += 1;
     startOfYear.setDate(startOfYear.getDate() + 7);
@@ -277,7 +277,7 @@ function getWorkSchedule(period, countWorkDays, countOffDays) {
   let workDays = countWorkDays;
   while (startDate <= endDate) {
     if (workDays !== 0) {
-      result.push(startDate.toLocaleDateString('ua').replaceAll('.', '-'));
+      result.push(startDate.toLocaleDateString('uk').replaceAll('.', '-'));
       startDate.setDate(startDate.getDate() + 1);
       workDays -= 1;
     } else {
